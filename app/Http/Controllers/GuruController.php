@@ -29,12 +29,11 @@ class GuruController extends Controller
                 })
                 ->addColumn('action', function($row){
                     $button  = '';
+                    $button .= '<a class="btn btn-xs btn-primary" href="'.route('guru.show',$row->id).'"><i class="fa-solid fa-eye"></i></a>';
                     $button .= '&nbsp;&nbsp;';
-                    $button .= '<a class="btn btn-xs btn-primary" href="'.route('guru.edit',$row->id).'"><i class="fa-solid fa-pen"></i></a>';
+                    $button .= '<a class="btn btn-xs btn-secondary" href="'.route('guru.edit',$row->id).'"><i class="fa-solid fa-pen"></i></a>';
                     $button .= '&nbsp;&nbsp;';
-                    $button .= '<a class="cursor-pointer btn-show" data-toggle="modal" data-id="'.$row->id.'"><i class="mdi mdi-eye"></i></i></a>';
-                    $button .= '&nbsp;&nbsp;';
-                    $button .= '<a href="javascript:void(0)" onclick="deleteItem(this)" data-name="'.$row->nama.'" data-id="'.$row->id.'"> <i class="mdi mdi-delete-forever text-danger"></a>';
+                    $button .= '<a class="btn btn-xs btn-danger"javascript:void(0)" onclick="deleteItem(this)" data-name="'.$row->nama.'" data-id="'.$row->id.'"> <i class="fa-solid fa-trash"></i></a>';
                     return $button;
                 })
                 ->rawColumns(['action','deskripsi'])
@@ -52,7 +51,8 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+
+        // return view('pages.guru.create');
     }
 
     /**
@@ -63,7 +63,35 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'nip'  => 'required',
+            'name' => 'required',
+            'email' => 'required|string|email|max:255|unique:gurus',
+            'password' => 'confirmed',
+            'tempat_lahir' => 'nullable',
+            'tanggal_lahir' => 'nullable',
+            'jenis_kelamin' => 'required',
+            'alamat' => 'nullable',
+            'no_telp' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        $input['password'] = Hash::make($request->password);
+
+        $data = Guru::create($input);
+
+        if($data) {
+            return response->json([
+                'success'  => true,
+                'message' => 'Guru berhasil ditambahkan'
+            ]);
+        } else {
+            return response->json([
+                'success'  => false,
+                'message' => 'Guru gagal ditambahkan'
+            ]);
+        }
+
     }
 
     /**

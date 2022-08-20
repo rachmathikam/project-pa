@@ -29,7 +29,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-
+                                    <a href="{{ route('guru.create') }}"><button class="btn btn-primary  btn-sm" type="button" style="float:right; text-transform: lowercase !important; letter-spacing: 2px"><i class="fa fa-plus">Tambah</i></button>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -101,6 +101,56 @@
             ],
         });
     });
+
+    function deleteItem(e) {
+            let id = e.getAttribute('data-id');
+            let name = e.getAttribute('data-name');
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: true
+            });
+            swalWithBootstrapButtons.fire({
+                title: 'Yakin menghapus '+name+" ?",
+                text: name+" akan di hapus",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya,Hapus',
+                cancelButtonText: 'Tidak, Batal!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "guru/" + id,
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                "_method": 'DELETE',
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    toastr.success(name + response.message);
+                                    var oTable = $('#tb-kontak-sekolah').DataTable(); //inialisasi datatable
+                                    oTable.ajax.reload();
+                                }
+                            }
+
+                        });
+                    }
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swal.fire(
+                        'Batal',
+                        'Data '+name+' tidak dihapus',
+                        'error'
+                    )
+                }
+            });
+        }
     </script>
     {{-- <script src="https://laravel.pixelstrap.com/viho/assets/js/jquery-3.5.1.min.js"></script>
 
