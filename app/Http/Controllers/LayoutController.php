@@ -10,7 +10,7 @@ class LayoutController extends Controller
     public function index(){
 
 
-        return view('layout.main')->with([
+        return view('pages.home.index')->with([
             'user' => Auth::user(),
         ]);
     }
