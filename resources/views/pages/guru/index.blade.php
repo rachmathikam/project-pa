@@ -1,7 +1,6 @@
 @extends('../layout.main')
 @section('content')
-
-
+{{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"> --}}
 <body>
     <!-- Loader ends-->
     <!-- page-wrapper Start-->
@@ -34,35 +33,17 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="display" id="basic-2">
+                                        <table class="display guru_table" id="basic-2">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
                                                     <th>NIP</th>
                                                     <th>Nama</th>
-                                                    <th>Tempat Lahir</th>
-                                                    <th>Tanggal Lahir</th>
-                                                    <th>Alamat</th>
-                                                    <th>Jenis Kelamin</th>
-                                                    <th>No Telphone</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($data as $item )
 
-                                                <tr>
-                                                    <th scope="row">{{$loop->iteration}}</th>
-                                                    <td>{{ $item->nip }}</td>
-                                                    <td>{{ $item->name }}</td>
-                                                    <td>{{ $item->tempat_lahir }}</td>
-                                                    <td>{{ $item->tanggal_lahir }}</td>
-                                                    <td>{{ $item->alamat }}</td>
-                                                    <td>{{ $item->jenis_kelamin }}</td>
-                                                    <td>{{ $item->no_telp }}</td>
-
-                                                </tr>
-                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -78,17 +59,52 @@
                 </div>
 
 
-
+            {{-- </div> --}}
                 <!-- Container-fluid Ends-->
             </div>
             <!-- footer start-->
 
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://kit.fontawesome.com/61941c798d.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+         $(document).ready(function () {
 
-    <script src="https://laravel.pixelstrap.com/viho/assets/js/jquery-3.5.1.min.js"></script>
+        $('#basic-2').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('guru.index') }}",
+                type: 'GET',
+            },
+            "responsive": true,
+            "language": {
+                "oPaginate": {
+                    "sNext": "<i class='fas fa-angle-right'>",
+                    "sPrevious": "<i class='fas fa-angle-left'>",
+                },
+            },
+            columns: [{
+                    data: 'DT_RowIndex',
+                },
+                {
+                    data: 'nip',
+                },
+                {
+                    data: 'name',
+                },
+                {
+                    data: 'action'
+                },
+            ],
+        });
+    });
+    </script>
+    {{-- <script src="https://laravel.pixelstrap.com/viho/assets/js/jquery-3.5.1.min.js"></script>
 
-    <script src="https://laravel.pixelstrap.com/viho/assets/js/datatable/datatables/datatable.custom.js"></script>
+    <script src="https://laravel.pixelstrap.com/viho/assets/js/datatable/datatables/datatable.custom.js"></script> --}}
 
 </body>
 

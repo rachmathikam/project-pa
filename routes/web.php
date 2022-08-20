@@ -33,7 +33,8 @@ Route::controller(LoginController::class)->group(function (){
     Route::get('logout','logout');
 });
 
-Route::get('/guru',[GuruController::class, 'index']);
+// Route::get('/guru',[GuruController::class, 'index']);
+Route::resource('/guru', GuruController::class);
 
 
 

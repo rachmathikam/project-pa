@@ -80,6 +80,7 @@
 
       </div>
     </div>
+    </div>
     <!-- latest jquery-->
     <script src="https://laravel.pixelstrap.com/viho/assets/js/jquery-3.5.1.min.js"></script>
 <!-- feather icon js-->
@@ -94,9 +95,12 @@
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <!-- Plugins JS start-->
 
-    <!-- Plugins JS Ends-->
+    <!-- Plugins Sweetalert-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Theme js-->
 <script src="https://laravel.pixelstrap.com/viho/assets/js/script.js"></script>
+<script src=//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js></script>
 @yield('javascript')
 <!-- Plugin used-->  </body>
 </html>

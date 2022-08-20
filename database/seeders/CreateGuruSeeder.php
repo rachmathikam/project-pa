@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Guru;
 use DB;
 use Hash;
 
@@ -16,7 +17,7 @@ class CreateGuruSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('gurus')->insert([
+      $guru = [[
             'name' => 'Muhammad Yasin',
             'nip'  => '219312230909',
             'email'=> 'yasin@gmail.com',
@@ -27,6 +28,23 @@ class CreateGuruSeeder extends Seeder
             'alamat' => 'JL.Guntur No.10',
             'no_telp' => '087850272625',
             'role' => 'guru',
-        ]);
+      ],
+
+        [
+            'name' => 'Rachmat Hikam',
+            'nip'  => '2103191228',
+            'email'=> 'hikam17@gmail.com',
+            'password'=> Hash::make('hikam123'),
+            'tempat_lahir' => 'Sumenep',
+            'tanggal_lahir' => '2001-07-01',
+            'jenis_kelamin' => 'laki-laki',
+            'alamat' => 'JL.Guntur No.10',
+            'no_telp' => '087850272625',
+            'role' => 'guru',
+        ]];
+
+        foreach ($guru as $k){
+            Guru::updateOrCreate($k);
+        }
     }
 }
