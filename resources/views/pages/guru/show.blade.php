@@ -9,7 +9,7 @@
                     <li class="breadcrumb-item"><a
                             href="{{ ('/') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ url('guru') }}">Guru</a></li>
-                    <li class="breadcrumb-item active">edit</a></li>
+                    <li class="breadcrumb-item active">Show</a></li>
 
                 </ol>
             </div>
@@ -25,11 +25,10 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header pb-0">
-                            <h5>Edit Data Guru</h5>
+                            <h5>Show Data Guru</h5>
                         </div>
                         <div class="card-body">
                             <form class="theme-form" id="form-guru">
-                                @method('PUT')
                                 @csrf
                                 <div class="mb-3">
                                     <label class="col-form-label pt-0" for="exampleInputPassword1">Nip</label>
@@ -73,8 +72,8 @@
                                     <span class="text-danger" id=error-no_telp></span>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="col-form-label pt-0" for="exampleInputPassword1">role</label>
-                                    <input class="form-control" id="exampleInputPassword1" value="{{ $data->role }}" name="role" type="text" placeholder="Name" />
+                                    <label class="col-form-label pt-0">role</label>
+                                    <input class="form-control"  value="{{ $data->role }}" name="role" type="text" placeholder="Name" />
                                     <span class="text-danger" id=error-role></span>
                                 </div>
                                 <div class="checkbox p-0">
@@ -109,7 +108,7 @@
             var formData = new FormData(this);
             $('#error-email').text('');
             $('#error-name').text('');
-            var route = "{{route('guru.update',$data->id)}}";
+            var route = "{{route('guru.show',$data->id)}}";
 
 
             $.ajax({

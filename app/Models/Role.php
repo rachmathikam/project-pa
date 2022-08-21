@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Guru extends Model
+class Role extends Model
 {
     use HasFactory;
-
-    protected $table = 'gurus';
-
+    protected $table = 'roles';
     protected $guarded = [];
 
-    public function role()
+    public function guru()
     {
-        return $this->belongsTo(Role::class, 'role_id');
+        return $this->hasMany(Guru::class);
     }
-
 }
-
-

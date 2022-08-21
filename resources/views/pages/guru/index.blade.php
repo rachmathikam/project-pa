@@ -29,7 +29,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{ route('guru.create') }}"><button class="btn btn-primary  btn-sm" type="button" style="float:right; text-transform: lowercase !important; letter-spacing: 2px"><i class="fa fa-plus">Tambah</i></button>
+                                    <a href="{{ route('guru.create') }}"><button class="btn btn-primary  btn-sm" type="button" style="float:right; text-transform: lowercase !important; letter-spacing: 2px"><i class="fa fa-plus">Tambah</i></button></a>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -55,13 +55,11 @@
 
                         <!-- Default ordering (sorting) Ends-->
                         <!-- Multi-Column Starts-->
-                    </div>
-                </div>
 
 
             {{-- </div> --}}
                 <!-- Container-fluid Ends-->
-            </div>
+
             <!-- footer start-->
 
         </div>
@@ -133,7 +131,7 @@
                             success: function(response) {
                                 if (response.success) {
                                     toastr.success(name + response.message);
-                                    var oTable = $('#tb-kontak-sekolah').DataTable(); //inialisasi datatable
+                                    var oTable = $('#guru_table').DataTable(); //inialisasi datatable
                                     oTable.ajax.reload();
                                 }
                             }
@@ -155,6 +153,7 @@
     {{-- <script src="https://laravel.pixelstrap.com/viho/assets/js/jquery-3.5.1.min.js"></script>
 
     <script src="https://laravel.pixelstrap.com/viho/assets/js/datatable/datatables/datatable.custom.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 

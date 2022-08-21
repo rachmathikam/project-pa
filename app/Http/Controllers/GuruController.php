@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Guru;
+use App\Models\{Guru,Role};
 use DataTables;
 
 class GuruController extends Controller
@@ -17,7 +17,7 @@ class GuruController extends Controller
     public function index(Request $request)
     {
         // $page = 'guru';
-        $data = Guru::all();
+        $data = Guru::with('role')->get();
         // dd($data);
         if($request->ajax()){
             return DataTables::of($data)
@@ -29,7 +29,7 @@ class GuruController extends Controller
                 })
                 ->addColumn('action', function($row){
                     $button  = '';
-                    $button .= '<a class="btn btn-xs btn-primary" href="'.route('guru.show',$row->id).'"><i class="fa-solid fa-eye"></i></a>';
+                    $button .= '<a href="'.route('guru.show',$row->id).'"class="btn btn-xs btn-primary" data-toggle="modal" data-id="'.$row->id.'"><i class="fa fa-eye"></i></a>';
                     $button .= '&nbsp;&nbsp;';
                     $button .= '<a class="btn btn-xs btn-secondary" href="'.route('guru.edit',$row->id).'"><i class="fa-solid fa-pen"></i></a>';
                     $button .= '&nbsp;&nbsp;';
@@ -51,8 +51,10 @@ class GuruController extends Controller
      */
     public function create()
     {
-
-        // return view('pages.guru.create');
+        $data = Guru::with('role')->get();
+        $role = Role::all();
+        // dd($role);
+        return view('pages.guru.create',compact('data','role'));
     }
 
     /**
@@ -63,6 +65,7 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $this->validate($request,[
             'nip'  => 'required',
             'name' => 'required',
@@ -73,8 +76,8 @@ class GuruController extends Controller
             'jenis_kelamin' => 'required',
             'alamat' => 'nullable',
             'no_telp' => 'nullable',
+            'role_id' =>'required',
         ]);
-
         $input = $request->all();
         $input['password'] = Hash::make($request->password);
 
@@ -102,7 +105,8 @@ class GuruController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Guru::findOrFail($id);
+        return view('pages.guru.show',compact('data'));
     }
 
     /**
@@ -161,6 +165,14 @@ class GuruController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Guru::findOrFail($id);
+        $item->delete();
+        if($item){
+            //redirect dengan pesan sukses
+            return redirect()->route('guru.index')->with(['success' => 'Data Berhasil Dihapus!']);
+         }else{
+           //redirect dengan pesan error
+           return redirect()->route('guru.index')->with(['error' => 'Data Gagal Dihapus!']);
+         }
     }
 }

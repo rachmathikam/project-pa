@@ -27,7 +27,7 @@ class CreateGuruSeeder extends Seeder
             'jenis_kelamin' => 'laki-laki',
             'alamat' => 'JL.Guntur No.10',
             'no_telp' => '087850272625',
-            'role' => 'guru',
+            'role_id'   => 1
       ],
 
         [
@@ -40,8 +40,21 @@ class CreateGuruSeeder extends Seeder
             'jenis_kelamin' => 'laki-laki',
             'alamat' => 'JL.Guntur No.10',
             'no_telp' => '087850272625',
-            'role' => 'guru',
+            'role_id'   => 2
+        ],
+        [
+            'name' => 'Si Fulan ',
+            'nip'  => '2103191228',
+            'email'=> 'fulan@gmail.com',
+            'password'=> Hash::make('fulan123'),
+            'tempat_lahir' => 'Sumenep',
+            'tanggal_lahir' => '2001-07-01',
+            'jenis_kelamin' => 'laki-laki',
+            'alamat' => 'JL.Guntur No.10',
+            'no_telp' => '087850272625',
+            'role_id'   => 3
         ]];
+
 
         foreach ($guru as $k){
             Guru::updateOrCreate($k);

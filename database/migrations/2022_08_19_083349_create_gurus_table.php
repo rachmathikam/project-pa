@@ -24,7 +24,11 @@ return new class extends Migration
             $table->enum('jenis_kelamin',['laki-laki','perempuan']);
             $table->string('alamat');
             $table->string('no_telp');
-            $table->string('role');
+            // $table->unsignedInteger('role_id');
+            $table->foreignId('role_id')
+                        ->references('id')
+                        ->on('roles')
+                        ->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -26,21 +26,56 @@
                             <h5>Tambah Data Guru</h5>
                         </div>
                         <div class="card-body">
-                            <form class="theme-form" id="form-guru">
+                            <form class="theme-form" action="{{ route('guru.store') }}" id="form-guru" method="POST">
                                 @csrf
+                                {{-- @method('POST') --}}
                                 <div class="mb-3">
-                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Email</label>
-                                    <input class="form-control" id="exampleInputEmail1" value="{{ $data->nip }}" type="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" />
+                                    <label class="col-form-label pt-0" for="exampleInputEmail1">NIP</label>
+                                    <input class="form-control" id="exampleInputEmail1" type="text" name="nip" aria-describedby="emailHelp" placeholder="Masukkan NIP anda" />
                                     <input type="hidden" id="id">
                                     <span class="text-danger" id=error-email></span>
                                 </div>
                                 <div class="mb-3">
                                     <label class="col-form-label pt-0" for="exampleInputPassword1">Nama</label>
-                                    <input class="form-control" id="exampleInputPassword1" value="{{ $data->name }}" name="name" type="text" placeholder="Name" />
+                                    <input class="form-control" id="exampleInputPassword1" name="name" type="text" placeholder="Masukkan nama anda" />
                                     <span class="text-danger" id=error-name></span>
                                 </div>
-                                <div class="checkbox p-0">
-                                    <input id="dafault-checkbox" type="checkbox" />
+                                <div class="mb-3">
+                                    <label class="col-form-label pt-0" for="exampleInputPassword1">Email</label>
+                                    <input class="form-control" id="exampleInputPassword1" name="email" type="email" placeholder="Masukkan email anda" />
+                                    <span class="text-danger" id=error-email></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="col-form-label pt-0" for="exampleInputPassword1">password</label>
+                                    <input class="form-control" id="exampleInputPassword1" name="password" type="password" placeholder="**********"/>
+                                    <span class="text-danger" id=error-password></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="col-form-label pt-0" for="exampleInputPassword1">Tempat Lahir</label>
+                                    <input class="form-control" id="exampleInputPassword1" name="tempat_lahir" type="text" placeholder="-- Tempat Lahir --"/>
+                                    <span class="text-danger" id=error-password></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="col-form-label pt-0" for="exampleInputPassword1">Tanggal Lahir</label>
+                                    <input class="form-control" id="exampleInputPassword1" name="tanggal_lahir" type="date" placeholder="Tanggal Lahir anda"/>
+                                    <span class="text-danger" id=error-tanggal_lahir></span>
+                                </div>
+                                <label class="col-form-label pt-0" >Peran</label>
+                                <select class="form-select"  aria-label="select example">
+									<option value="">-- Pilih Peran --</option>
+									@foreach ($role as $roles )
+									<option value="{{ $roles->id }}">{{ $roles->role }}</option>
+                                    @endforeach
+								</select>
+                                <div class="mb-3 mt-3">
+                                    <label class="col-form-label pt-0" for="exampleInputPassword1">Alamat</label>
+                                    <input class="form-control" id="exampleInputPassword1" name="alamat" type="text" placeholder="alamat anda"/>
+                                    <span class="text-danger" id=error-alamat></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="col-form-label pt-0">No Telp</label>
+                                    <input class="form-control" id="phone" name="no_telp" type="tel" placeholder="Masukkan No Telphone"  pattern="[0-9]{12}"/>
+                                    <span class="text-danger" id=error-no_telp></span>
                                 </div>
                             </form>
                         </div>
@@ -53,6 +88,8 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 
 
     <script>
@@ -113,8 +150,8 @@ $('#form-guru').on('submit', function(event) {
 
 
 
-});
+ });
 
-        </script>
+    </script>
 
 @endsection

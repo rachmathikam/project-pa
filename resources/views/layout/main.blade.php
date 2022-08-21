@@ -76,11 +76,16 @@
               <!-- Container-fluid Ends-->
         </div>
         <!-- footer start-->
-        @include('layout.footer')
+@include('layout/footer')
+
+
 
       </div>
     </div>
-    </div>
+</div>
+</div>
+
+  </body>
     <!-- latest jquery-->
     <script src="https://laravel.pixelstrap.com/viho/assets/js/jquery-3.5.1.min.js"></script>
 <!-- feather icon js-->
