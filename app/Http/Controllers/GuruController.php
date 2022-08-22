@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\{Guru,Role};
 use DataTables;
+use DB;
 
 class GuruController extends Controller
 {
@@ -18,6 +19,7 @@ class GuruController extends Controller
     {
         // $page = 'guru';
         $data = Guru::with('role')->get();
+        $dataCount = $data->count();
         // dd($data);
         if($request->ajax()){
             return DataTables::of($data)
@@ -41,7 +43,7 @@ class GuruController extends Controller
                 ->make(true);
 
             }
-            return view('pages.guru.index',compact('data'));
+            return view('pages.guru.index',compact('data','dataCount'));
         }
 
     /**
@@ -51,10 +53,11 @@ class GuruController extends Controller
      */
     public function create()
     {
-        $data = Guru::with('role')->get();
+        // $data = Guru::with('role')->get();
         $role = Role::all();
-        // dd($role);
-        return view('pages.guru.create',compact('data','role'));
+        $jenis_kelamin = DB::table('genders')->get();
+        // dd($jenis_kelamin);
+        return view('pages.guru.create',compact('role','jenis_kelamin'));
     }
 
     /**
@@ -62,6 +65,9 @@ class GuruController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+
+     *
      */
     public function store(Request $request)
     {
@@ -70,19 +76,36 @@ class GuruController extends Controller
             'nip'  => 'required',
             'name' => 'required',
             'email' => 'required|string|email|max:255|unique:gurus',
-            'password' => 'confirmed',
+            'password' => 'required|min:5',
             'tempat_lahir' => 'nullable',
             'tanggal_lahir' => 'nullable',
             'jenis_kelamin' => 'required',
             'alamat' => 'nullable',
             'no_telp' => 'nullable',
             'role_id' =>'required',
+            'gender_id' => 'required',
+        ],
+        [
+            'jenis_kelamin.required' => 'Jenis kelamin harus terisi'
         ]);
         $input = $request->all();
         $input['password'] = Hash::make($request->password);
 
-        $data = Guru::create($input);
+        $data = Guru::create([
+            'nip'  => $input['nip'],
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'tempat_lahir' => $input['tempat_lahir'],
+            'tanggal_lahir' => $input['tanggal_lahir'],
+            'gender_id' => $input['gender_id'],
+            'alamat' => $input['alamat'],
+            'no_telp' => $input['no_telp'],
+            'role_id' => 2,
+            // 'password' => Hash::make($request->password)
+        ]);
 
+        // return redirect()->route('guru.index')->with('success','data berhasil ditambakan');
+        // dd($data);
         if($data) {
             return response->json([
                 'success'  => true,
@@ -96,7 +119,25 @@ class GuruController extends Controller
         }
 
     }
+    public function getGender(Request $request) {
+        $search = $request->search;
 
+        if($search == ''){
+            $gander = DB::table('ganders')->where('id','gander')->get();
+            // dd($gender);
+        }else {
+            $gender = DB::table('ganders')->where('gender','like','%' .$search. '%')->latest()->get();
+        }
+
+        $response = array();
+        foreach($gender as $data) {
+            $response[] = array(
+                "id" => $data->id,
+                "text" => $data->gender
+            );
+        }
+        return response()->json($response);
+    }
     /**
      * Display the specified resource.
      *
@@ -105,8 +146,9 @@ class GuruController extends Controller
      */
     public function show($id)
     {
-        $data = Guru::findOrFail($id);
-        return view('pages.guru.show',compact('data'));
+        $role = Role::all();
+        $data = Guru::find($id);
+        return view('pages.guru.show',compact('data','role'));
     }
 
     /**
@@ -117,9 +159,9 @@ class GuruController extends Controller
      */
     public function edit($id)
     {
+        $role = Role::all();
         $data = Guru::find($id);
-
-       return view('pages.guru.edit',compact('data'));
+       return view('pages.guru.edit',compact('data','role'));
     }
 
     /**
@@ -142,7 +184,7 @@ class GuruController extends Controller
         $data = Guru::find($id);
 
         $data->update($validateData);
-        dd($data);
+        // dd($data);
         if($data) {
             return response->json([
                 'success'  => true,

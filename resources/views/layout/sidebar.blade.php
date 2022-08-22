@@ -2,8 +2,8 @@
 
 
     <div class="sidebar-user text-center">
-        <a class="setting-primary" href="javascript:void(0)"><i data-feather="settings"></i></a><img class="img-90 rounded-circle" src="https://laravel.pixelstrap.com/viho/assets/images/dashboard/1.png" alt="" />
-        <div class="badge-bottom"><span class="badge badge-primary">New</span></div>
+        <a class="setting-primary" href="{{ route('profile.index')}}"><i data-feather="settings"></i></a><img class="img-90 rounded-circle" src="https://laravel.pixelstrap.com/viho/assets/images/dashboard/1.png" alt="" />
+        <div class="badge-bottom"><span class="badge badge-primary">{{ Auth::user()->role }}</span></div>
         <a href="user-profile"> <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->name }}</h6></a>
         <p class="mb-0 font-roboto">Human Resources Department</p>
     </div>
@@ -21,10 +21,13 @@
                             <h6>General</h6>
                         </div>
                     </li>
+
                     <li class="dropdown">
                         <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="home"></i><span>Dashboard</span></a>
                         <ul class="nav-submenu menu-content" style="display: block;">
+                            <li><a href="{{ url('/page') }}" class="active">Page</a></li>
                             <li><a href="{{ url('/') }}" class="active">Home</a></li>
+
                         </ul>
                     </li>
 

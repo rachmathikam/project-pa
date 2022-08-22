@@ -22,6 +22,9 @@ class RoleSeeder extends Seeder
         ],
         [
             'role' => 'siswa',
+        ],
+        [
+            'role' => 'wali kelas',
         ]
     ];
 

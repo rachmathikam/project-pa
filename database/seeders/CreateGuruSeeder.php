@@ -24,10 +24,11 @@ class CreateGuruSeeder extends Seeder
             'password'=> Hash::make('yasin123'),
             'tempat_lahir' => 'Sumenep',
             'tanggal_lahir' => '2021-12-21',
-            'jenis_kelamin' => 'laki-laki',
             'alamat' => 'JL.Guntur No.10',
             'no_telp' => '087850272625',
-            'role_id'   => 1
+            'role_id'   => 1,
+
+            'gender_id' => 1
       ],
 
         [
@@ -37,10 +38,10 @@ class CreateGuruSeeder extends Seeder
             'password'=> Hash::make('hikam123'),
             'tempat_lahir' => 'Sumenep',
             'tanggal_lahir' => '2001-07-01',
-            'jenis_kelamin' => 'laki-laki',
             'alamat' => 'JL.Guntur No.10',
             'no_telp' => '087850272625',
-            'role_id'   => 2
+            'role_id'   => 2,
+            'gender_id' => 1
         ],
         [
             'name' => 'Si Fulan ',
@@ -49,10 +50,10 @@ class CreateGuruSeeder extends Seeder
             'password'=> Hash::make('fulan123'),
             'tempat_lahir' => 'Sumenep',
             'tanggal_lahir' => '2001-07-01',
-            'jenis_kelamin' => 'laki-laki',
             'alamat' => 'JL.Guntur No.10',
             'no_telp' => '087850272625',
-            'role_id'   => 3
+            'role_id'   => 3,
+            'gender_id' => 1
         ]];
 
 

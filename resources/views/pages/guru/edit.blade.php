@@ -73,9 +73,15 @@
                                     <span class="text-danger" id=error-no_telp></span>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="col-form-label pt-0" for="exampleInputPassword1">role</label>
-                                    <input class="form-control" id="exampleInputPassword1" value="{{ $data->role }}" name="role" type="text" placeholder="Name" />
-                                    <span class="text-danger" id=error-role></span>
+                                    <label class="col-form-label pt-0">Role</label>
+                                    <select class="form-select" aria-label="select example" name="gender_id">
+                                        <option value="">-- Pilih...--</option>
+                                        @foreach ($role as $roles)
+                                            <option  value="{{ $roles->id}}">{{ $roles->role }}</option>
+                                            {{-- <option name="jenis_kelamin" value="{{ $gender->id }}">{{ $gender->gender }}</option> --}}
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger" id="error-jenis-kelamin"></span>
                                 </div>
                                 <div class="checkbox p-0">
                                     <input id="dafault-checkbox" type="checkbox" />
@@ -97,10 +103,6 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.20.2/bootstrap-table.min.js" integrity="sha512-9KY1w0S1bRPqvsNIxj3XovwFzZ7bOFG8u0K1LByeMVrzYhLu3v7sFRAlwfhBVFsHRiuMc6shv1lRLCTInwqxNg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
     <script type="text/javascript">
-    // console.log('.submit');
-    // $('.submit').on('click', function(e) {
-    //     alert('sss')
-    // });
     $(document).ready(function() {
         $('#form-guru').on('submit', function(event) {
             // alert('testing');

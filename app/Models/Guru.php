@@ -18,6 +18,11 @@ class Guru extends Model
         return $this->belongsTo(Role::class, 'role_id');
     }
 
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class,'gender_id');
+    }
+
 }
 
 

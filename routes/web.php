@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,7 +36,15 @@ Route::controller(LoginController::class)->group(function (){
 });
 
 // Route::get('/guru',[GuruController::class, 'index']);
-Route::resource('/guru', GuruController::class);
+Route::resource('/guru', GuruController::class,);
+Route::post('get-genders',       [GuruController::class, 'getGender'])->name('get-genders');
+
+Route::resource('/profile', \App\Http\Controllers\ProfileController::class);
+Route::resource('/page', \App\Http\Controllers\PageController::class);
+
+
+
+
 
 
 

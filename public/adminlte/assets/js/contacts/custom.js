@@ -59,7 +59,7 @@ function submitContact() {
 		    timer: 300
 		});
 	}
-} 
+}
 
 (function($) {
 	$(".contact-editform").hide();
@@ -143,7 +143,7 @@ $('.edit-information').on('click', function(e) {
 	$(".edit-information").hide();
 });
 
-// history 
+// history
 
 function history(index) {
     $("#right-history").toggleClass("show");

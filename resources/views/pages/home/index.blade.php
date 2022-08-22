@@ -21,8 +21,8 @@
         </div>
         <div class="card-body text-center p-t-5">
           <h3 class="font-light">Welcome Back, {{ Auth::user()->name }} !!</h3>
-          <p id="demo"></p>
-          <button class="btn btn-light mybtn1" onclick="myFunction()">Click Me </button>
+          <p id="demo" style="visibility: hidden; font-size: 25px;">Selamat Datang di Website Pendidikan Integral SMP Lukman Al- Hakim</p>
+          <button class="btn btn-light" id="btn">Click Me </button>
         </div>
 
     </div>
@@ -35,9 +35,16 @@
 
 
 <script>
-    function myFunction() {
-      document.getElementById("demo").innerHTML = "Welcome to the viho Family! we are glad that you are visite this dashboard. we will be happy to help you grow your business.";
-    }
+   const btn = document.getElementById('btn');
+
+btn.addEventListener('click', () => {
+  // 👇️ hide button (still takes up space on page)
+  btn.style.visibility = 'hidden';
+
+  // 👇️ show div
+  const box = document.getElementById('demo');
+  box.style.visibility = 'visible';
+});
     </script>
 
 
